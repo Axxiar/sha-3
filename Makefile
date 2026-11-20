@@ -1,7 +1,10 @@
 CC = cc
 CFLAGS = -O2 -Wall -Wextra -pedantic -std=c99 -Iinclude
 
-all: test_keccak test_sha3
+all: sha3sum
+
+sha3sum: src/main.c src/sha3.c src/keccak.c include/sha3.h include/keccak.h
+	$(CC) $(CFLAGS) -o $@ src/main.c src/sha3.c src/keccak.c
 
 test_keccak: test/test_keccak.c src/keccak.c include/keccak.h
 	$(CC) $(CFLAGS) -o $@ test/test_keccak.c src/keccak.c
@@ -9,7 +12,7 @@ test_keccak: test/test_keccak.c src/keccak.c include/keccak.h
 test_sha3: test/test_sha3.c src/sha3.c src/keccak.c include/sha3.h include/keccak.h
 	$(CC) $(CFLAGS) -o $@ test/test_sha3.c src/sha3.c src/keccak.c
 
-test: all
+test: test_keccak test_sha3
 	./test_keccak
 	./test_sha3
 
@@ -21,6 +24,6 @@ compute-constants: tools/compute_constants
 	./tools/compute_constants
 
 clean:
-	rm -f test_keccak test_sha3 tools/compute_constants
+	rm -f test_keccak test_sha3 tools/compute_constants sha3sum
 
 .PHONY: all test compute-constants clean
