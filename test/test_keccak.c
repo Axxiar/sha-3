@@ -75,14 +75,14 @@ static int check(const char *name, const uint64_t A[KECCAK_LANES],
     {
         if (A[i] != E[i])
         {
-            printf("FAIL %s, lane %2d: %016llx, expected %016llx\n", name, i,
+            printf("-FAIL %s, lane %2d: %016llx, expected %016llx\n", name, i,
                    (unsigned long long)A[i], (unsigned long long)E[i]);
             bad = 1;
         }
     }
 
     if (!bad)
-        printf("OK %s\n", name);
+        printf("+OK %s\n", name);
     return bad;
 }
 
