@@ -15,8 +15,9 @@ test_sha3: test/test_sha3.c src/sha3.c src/keccak.c include/sha3.h include/kecca
 test: test_keccak test_sha3
 	./test_keccak
 	./test_sha3
+	sh test/test.sh
 
-# Computes constans RC and RHO 
+# Computes constants RC and RHO 
 tools/compute_constants: tools/compute_constants.c
 	$(CC) $(CFLAGS) -o $@ tools/compute_constants.c
 
@@ -27,3 +28,4 @@ clean:
 	rm -f test_keccak test_sha3 tools/compute_constants sha3sum
 
 .PHONY: all test compute-constants clean
+

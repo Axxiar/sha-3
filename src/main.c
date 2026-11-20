@@ -4,8 +4,7 @@
 
 #include "sha3.h"
 
-/* Bytes read by fread: 480 blocks of 136 bytes (~ 64 KB)
- * Using a multiple of the rate keeps the input aligned */
+/* Bytes read by fread: 480 blocks of 136 bytes (~ 64 KB) */
 #define READ_SIZE (SHA3_256_RATE * 480)
 
 static uint8_t read_buf[READ_SIZE];
