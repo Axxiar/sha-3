@@ -3,7 +3,7 @@
  *
  * It is a standalone program, the output goes to stdout and should be copied
  * into src/keccak.c
- * Usage: make compute_constants */
+ * Usage: make compute-constants */
 
 #include <stdint.h>
 #include <stdio.h>

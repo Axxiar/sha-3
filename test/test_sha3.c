@@ -47,6 +47,27 @@ static void test_vectors(void)
     check_hex(
         "\"abc\"", d,
         "3a985da74fe225b2045c172d6bd390bd855f086e3e9d525b46bfe24511431532");
+
+    /* Multi-block messages */
+    const char *m448 = "abcdbcdecdefdefgefghfghighijhijkijkljklmklmnlmnomnopnopq";
+    sha3_256(m448, strlen(m448), d);
+    check_hex(
+        "448-bit message", d,
+        "41c0dba2a9d6240849100376a8235e2c82e1b9998a999e21db32dd97496d3376");
+
+    const char *m896 = "abcdefghbcdefghicdefghijdefghijkefghijklfghijklmghijklmn"
+                       "hijklmnoijklmnopjklmnopqklmnopqrlmnopqrsmnopqrstnopqrstu";
+    sha3_256(m896, strlen(m896), d);
+    check_hex(
+        "896-bit message", d,
+        "916f6061fe879741ca6469b43971dfdb28b1a32dc36cb3254e812be27aad1d18");
+
+    uint8_t a3[200];
+    memset(a3, 0xA3, sizeof a3);
+    sha3_256(a3, sizeof a3, d);
+    check_hex(
+        "1600-bit message (200 x 0xA3)", d,
+        "79f38adec5c20307a98ef76e8324afbfd46cfd81b22e3973c65fa1bd9de31787");
 }
 
 /* Self-consistency: for each length, hashing in one call must equal
